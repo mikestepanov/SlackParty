@@ -1,4 +1,8 @@
 var mysql = require('mysql');
+var request = require('request');
+var config = require('../config.js');
+
+var token = config.token;
 
 var connection = mysql.createConnection({
   host     : 'localhost',
@@ -20,17 +24,17 @@ var selectAll = function(callback) {
 var getChannels = function(callback) {
   var base = 'https://slack.com/api/channels.list';
   var url = `${base}?token=${token}`;
-  http.get(url, function(res) {
-    var body = '';
-
-    res.on('data', function(chunk) {
-      body += chunk;
-    });
-
-    res.on('end', function() {
-      console.log('end', JSON.parse(body));
-      callback(JSON.parse(body));
-    });
+  console.log(url);
+  request.get({
+    url: url,
+    json: true,
+    headers: {'User-Agent': 'request'}
+  }, (err, res, data) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, data);
+    }
   });
 };
 

@@ -2,10 +2,6 @@ var express = require('express');
 var bodyParser = require('body-parser');
 
 var items = require('../database-mysql');
-var config = require('../config.js');
-
-var token = config.token;
-console.log(token);
 
 var app = express();
 
@@ -26,11 +22,14 @@ app.listen(3000, function() {
 });
 
 app.get('/channels', function(req, res) {
+  console.log('GOT INTO CHANNELS');
   items.getChannels(function(err, data) {
     if(err) {
+      console.log('err');
       res.sendStatus(500);
     } else {
-      res.json(data);
+      console.log('data');
+      res.json(data.channels);
     }
   });
 });
