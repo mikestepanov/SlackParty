@@ -3,7 +3,7 @@ var mysql = require('mysql');
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : 'FILL_ME_IN',
+  password : 'pass',
   database : 'test'
 });
 
@@ -16,5 +16,17 @@ var selectAll = function(callback) {
     }
   });
 };
+  connection.query('SELECT * FROM items', function(err, results, fields) {
+    var base = 'https://slack.com/api/channels.list';
+    var url = `${base}?token=${token}`;
+
+    http.get(url, function(res) {
+
+    });
+  });
+};
+
+
+
 
 module.exports.selectAll = selectAll;
