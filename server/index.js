@@ -26,6 +26,11 @@ app.listen(3000, function() {
 });
 
 app.get('/channels', function(req, res) {
-  var base = 'https://slack.com/api/channels.list';
-  var url = `${base}?token=${token}`;
+  items.getChannels(function(err, data) {
+    if(err) {
+      res.sendStatus(500);
+    } else {
+      res.json(data);
+    }
+  });
 });
