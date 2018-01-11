@@ -16,17 +16,23 @@ var selectAll = function(callback) {
     }
   });
 };
-  connection.query('SELECT * FROM items', function(err, results, fields) {
-    var base = 'https://slack.com/api/channels.list';
-    var url = `${base}?token=${token}`;
 
-    http.get(url, function(res) {
+var getChannels = function(callback) {
+  var base = 'https://slack.com/api/channels.list';
+  var url = `${base}?token=${token}`;
+  http.get(url, function(res) {
+    var body = '';
 
+    res.on('data', function(chunk) {
+      body += chunk;
+    });
+
+    res.on('end', function() {
+      console.log('end', JSON.parse(body));
+      callback(JSON.parse(body));
     });
   });
 };
 
-
-
-
 module.exports.selectAll = selectAll;
+module.exports.getChannels = getChannels;
