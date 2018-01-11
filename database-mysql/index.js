@@ -24,7 +24,6 @@ var selectAll = function(callback) {
 var getChannels = function(callback) {
   var base = 'https://slack.com/api/channels.list';
   var url = `${base}?token=${token}`;
-  console.log(url);
   request.get({
     url: url,
     json: true,
