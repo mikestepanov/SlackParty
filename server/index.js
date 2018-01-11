@@ -25,7 +25,7 @@ app.get('/channels', function(req, res) {
   console.log('GOT INTO CHANNELS');
   items.getChannels(function(err, data) {
     if(err) {
-      console.log('err');
+      console.log('WE ARE SCREWED AT /channels');
       res.sendStatus(500);
     } else {
       console.log('data');

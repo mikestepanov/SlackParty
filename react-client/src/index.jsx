@@ -8,10 +8,14 @@ class App extends React.Component {
     super(props);
     this.state = {
       items: [],
-      channels: []
+      channels: [],
+      currentChannel: ''
     }
 
-    this.omega = this.omega.bind(this);
+    this.getChannels = this.getChannels.bind(this);
+    this.getMessages = this.getMessages.bind(this);
+
+    this.getChannels();
   }
 
   componentDidMount() {
@@ -28,11 +32,29 @@ class App extends React.Component {
     });
   }
 
-  omega() {
+  getChannels() {
     const that = this;
     $.ajax({
       method: 'GET',
       url: '/channels',
+      success: (data) => {
+        console.log('data', data);
+        that.setState({
+          channels: data,
+          currentChannel: data[0]
+        })
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    });
+  }
+
+  getMessages() {
+    const that = this;
+    $.ajax({
+      method: 'GET',
+      url: '/messages',
       success: (data) => {
         console.log('data', data);
         that.setState({
@@ -47,7 +69,7 @@ class App extends React.Component {
 
   render () {
     return (<div>
-      <h1 onClick={this.omega}>Item List</h1>
+      <h1 onClick={this.getMessages}>Item List</h1>
       <List items={this.state.items}/>
     </div>)
   }
