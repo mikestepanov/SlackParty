@@ -31,12 +31,12 @@ class App extends React.Component {
   omega() {
     const that = this;
     $.ajax({
-      method: 'URL',
+      method: 'GET',
       url: '/channels',
       success: (data) => {
-        console.log(data);
+        console.log('data', data);
         that.setState({
-          items: data
+          channels: data
         })
       },
       error: (err) => {
@@ -47,7 +47,7 @@ class App extends React.Component {
 
   render () {
     return (<div>
-      <h1 onClick={this.omega()}>Item List</h1>
+      <h1 onClick={this.omega}>Item List</h1>
       <List items={this.state.items}/>
     </div>)
   }

@@ -3,7 +3,6 @@ var request = require('request');
 var config = require('../config.js');
 
 var token = config.token;
-console.log(token);
 
 var connection = mysql.createConnection({
   host     : 'localhost',

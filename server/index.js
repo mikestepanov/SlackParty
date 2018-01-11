@@ -25,11 +25,11 @@ app.get('/channels', function(req, res) {
   console.log('GOT INTO CHANNELS');
   items.getChannels(function(err, data) {
     if(err) {
-      console.log(err);
+      console.log('err');
       res.sendStatus(500);
     } else {
-      console.log(data);
-      res.json(data);
+      console.log('data');
+      res.json(data.channels);
     }
   });
 });
