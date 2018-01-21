@@ -11,6 +11,7 @@ class Channels extends React.Component {
     };
 
     this.getChannels = this.getChannels.bind(this);
+    this.onChannelChange = this.onChannelChange.bind(this);
     this.getChannels();
   }
 
@@ -19,10 +20,15 @@ class Channels extends React.Component {
       method: 'GET',
       url: '/channels',
       success: (data) => {
-        console.log('data', data);
+        var filteredData = [];
+        for (var channel of data) {
+          if (!channel.is_archived) {
+            filteredData.push(channel);
+          }
+        }
         this.setState({
-          channels: data,
-          currentChannelId: data[0]
+          channels: filteredData,
+          selectedChannel: filteredData[0].id
         })
       },
       error: (err) => {
@@ -31,14 +37,26 @@ class Channels extends React.Component {
     });
   }
 
+  onChannelChange(event) {
+    for (var channel of this.state.channels) {
+      if (channel.name === event.target.value) {
+        this.setState({
+          selectedChannel: channel
+        }, function() {
+          this.props.onChannelChange(this.state.selectedChannel);
+        });
+      }
+    }
+  }
+
+
   render() {
     return (
       <div id="channels">
-        <h1>f</h1>
-        {this.state.channels.length}
-        <select>
-          {this.state.channels.map((channel, idx) =>
-            <option key={idx}>{channel.name}</option>
+        <span> Channels: </span>
+        <select onChange={this.onChannelChange}>
+          {this.state.channels.map(channel =>
+            <option key={channel.id}>{channel.name}</option>
           )}
         </select>
       </div>
