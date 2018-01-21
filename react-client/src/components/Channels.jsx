@@ -10,12 +10,10 @@ class Channels extends React.Component {
       selectedChannel: {}
     };
 
-    this.getChannels = this.getChannels.bind(this);
     this.onChannelChange = this.onChannelChange.bind(this);
-    this.getChannels();
   }
 
-  getChannels() {
+  componentWillMount() {
     $.ajax({
       method: 'GET',
       url: '/channels',
@@ -28,7 +26,9 @@ class Channels extends React.Component {
         }
         this.setState({
           channels: filteredData,
-          selectedChannel: filteredData[0].id
+          selectedChannel: filteredData[0]
+        }, function() {
+          this.props.onChannelChange(this.state.selectedChannel);
         })
       },
       error: (err) => {
