@@ -7,6 +7,10 @@ var app = express();
 
 app.use(express.static(__dirname + '/../react-client/dist'));
 
+app.listen(3000, function() {
+  console.log('listening on port 3000!');
+});
+
 app.get('/items', function (req, res) {
   items.selectAll(function(err, data) {
     if(err) {
@@ -15,10 +19,6 @@ app.get('/items', function (req, res) {
       res.json(data);
     }
   });
-});
-
-app.listen(3000, function() {
-  console.log('listening on port 3000!');
 });
 
 app.get('/channels', function(req, res) {
