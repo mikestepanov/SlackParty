@@ -11,16 +11,6 @@ app.listen(3000, function() {
   console.log('listening on port 3000!');
 });
 
-app.get('/items', function (req, res) {
-  items.selectAll(function(err, data) {
-    if(err) {
-      res.sendStatus(500);
-    } else {
-      res.json(data);
-    }
-  });
-});
-
 app.get('/channels', function(req, res) {
   console.log('GOT INTO CHANNELS');
   items.getChannels(function(err, data) {

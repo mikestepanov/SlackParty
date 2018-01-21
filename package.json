@@ -1,6 +1,6 @@
 {
-  "name": "github-fetcher-fullstack-v2",
-  "version": "1.0.0",
+  "name": "roflName",
+  "version": "0.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,8 +9,8 @@
     "server-dev": "nodemon server/index.js",
     "sass-dev": "sass --watch react-client/dist/sass/styles.scss:react-client/dist/styles.css --style compressed"
   },
-  "author": "Beth Johnson",
-  "license": "ISC",
+  "author": "rofl_author",
+  "license": "rofl_license",
   "devDependencies": {
     "babel-core": "^6.23.1",
     "babel-loader": "^7.1.2",
