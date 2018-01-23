@@ -7,7 +7,8 @@ class Main extends React.Component {
     super(props);
 
     this.state = {
-      currentChannel: {}
+      currentChannel: {},
+      messages: {}
     }
 
     this.getMessages = this.getMessages.bind(this);
@@ -19,10 +20,11 @@ class Main extends React.Component {
     $.ajax({
       method: 'GET',
       url: '/messages',
+      data: JSON.stringify(currentChannel),
       success: (data) => {
         console.log('data', data);
         that.setState({
-          channels: data
+          messages: data
         })
       },
       error: (err) => {
@@ -34,6 +36,8 @@ class Main extends React.Component {
   onChannelChange(channel) {
     this.setState({
       currentChannel: channel
+    }, function() {
+      this.getMessages();
     })
   }
 
