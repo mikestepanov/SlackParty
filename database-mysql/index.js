@@ -1,6 +1,6 @@
 var mysql = require('mysql');
 var request = require('request');
-var config = require('../config.js');
+var config = require('../config.example.js');
 
 var token = config.token;
 
