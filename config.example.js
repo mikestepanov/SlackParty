@@ -1,1 +1,1 @@
-exports.token = 'roflToken';
+exports.token = '';
