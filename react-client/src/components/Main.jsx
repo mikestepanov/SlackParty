@@ -44,7 +44,7 @@ class Main extends React.Component {
   render () {
     return (
       <div>
-        {this.state.currentChannel.id}
+        <h5>Channel ID: {this.state.currentChannel.id}</h5>
         <Channels onChannelChange={this.onChannelChange}/>
         <ul>
           {this.state.messages.map((message, idx) =>
