@@ -9,7 +9,7 @@ class Main extends React.Component {
     this.state = {
       currentChannel: {},
       messages: {}
-    }
+    };
 
     this.getMessages = this.getMessages.bind(this);
     this.onChannelChange = this.onChannelChange.bind(this);
@@ -20,9 +20,8 @@ class Main extends React.Component {
     $.ajax({
       method: 'GET',
       url: '/messages',
-      data: JSON.stringify(currentChannel),
+      data: JSON.stringify({channel: that.state.currentChannel.id}),
       success: (data) => {
-        console.log('data', data);
         that.setState({
           messages: data
         })
@@ -37,16 +36,21 @@ class Main extends React.Component {
     this.setState({
       currentChannel: channel
     }, function() {
+      console.log(this.state.currentChannel.id);
       this.getMessages();
-    })
+    });
   }
 
   render () {
     return (
       <div>
         {this.state.currentChannel.id}
-        <h1 onClick={this.getMessages}>Item List</h1>
         <Channels onChannelChange={this.onChannelChange}/>
+        <ul>
+          {this.state.messages.map(message =>
+            <li></li>
+          )}
+        </ul>
       </div>
     );
   }
