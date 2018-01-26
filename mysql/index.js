@@ -22,6 +22,27 @@ var getChannels = function(callback) {
     if (err) {
       callback(err, null);
     } else {
+      getPrivateChannels(function(err, privateata) {
+        if (err) {
+          callback()
+        }
+      })
+      callback(null, data);
+    }
+  });
+};
+
+var getPrivateChannels = function(callback) {
+  var base = 'https://slack.com/api/groups.list';
+  var url = `${base}?token=${token}`;
+  request.get({
+    url: url,
+    json: true,
+    headers: {'User-Agent': 'request'}
+  }, (err, res, data) => {
+    if (err) {
+      callback(err, null);
+    } else {
       callback(null, data);
     }
   });

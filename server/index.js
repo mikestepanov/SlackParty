@@ -1,11 +1,11 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 
-var items = require('../database-mysql');
+var items = require('../mysql');
 
 var app = express();
 
-app.use(express.static(__dirname + '/../react-client/dist'));
+app.use(express.static(__dirname + '/../react/dist'));
 app.use(bodyParser.json());
 var port = process.env.PORT || 3000;
 
