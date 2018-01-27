@@ -16,14 +16,13 @@ class Main extends React.Component {
   }
 
   getMessages() {
-    const that = this;
     $.ajax({
       method: 'GET',
       url: '/messages',
-      data: {channel: that.state.currentChannel.id},
+      data: {channel: this.state.currentChannel.id},
       success: (data) => {
         console.log(data);
-        that.setState({
+        this.setState({
           messages: data
         })
       },
@@ -44,7 +43,7 @@ class Main extends React.Component {
   render () {
     return (
       <div>
-        {this.state.currentChannel.id}
+        <h5>Channel ID: {this.state.currentChannel.id}</h5>
         <Channels onChannelChange={this.onChannelChange}/>
         <ul>
           {this.state.messages.map((message, idx) =>

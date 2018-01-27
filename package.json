@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "ez": "npm run react-dev & npm run server-dev & npm run sass-dev",
+    "start": "node server/index.js",
+    "magic": "npm run react-dev & npm run server-dev & npm run sass-npm-dev",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
-    "sass-dev": "sass --watch react-client/dist/sass/styles.scss:react-client/dist/styles.css --style compressed"
+    "sass-gem-dev": "sass --watch react/dist/sass/styles.scss:react/dist/styles.css --style compressed",
+    "sass-npm-dev": "node-sass --watch react/dist/sass/styles.scss -o react/dist --output-style compressed"
   },
   "author": "rofl_author",
   "license": "rofl_license",
@@ -23,6 +25,7 @@
     "express": "^4.15.0",
     "jquery": "^3.1.1",
     "mysql": "^2.13.0",
+    "node-sass": "^4.7.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "request": "^2.83.0"

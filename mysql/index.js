@@ -11,9 +11,26 @@ var connection = mysql.createConnection({
   database : 'test'
 });
 
-var getChannels = function(callback) {
+var getPublicChannels = function(callback) {
   var base = 'https://slack.com/api/channels.list';
   var url = `${base}?token=${token}`;
+  request.get({
+    url: url,
+    json: true,
+    headers: {'User-Agent': 'request'}
+  }, (err, res, data) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, data);
+    }
+  });
+};
+
+var getPrivateChannels = function(callback) {
+  var base = 'https://slack.com/api/groups.list';
+  var url = `${base}?token=${token}`;
+  console.log(url);
   request.get({
     url: url,
     json: true,
@@ -45,6 +62,7 @@ var getMessages = function(channel, callback) {
 };
 
 module.exports = {
-  getChannels,
+  getPublicChannels,
+  getPrivateChannels,
   getMessages
 };
