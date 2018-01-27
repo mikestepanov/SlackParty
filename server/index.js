@@ -15,12 +15,12 @@ app.listen(port, function() {
 
 app.get('/channels', function(req, res) {
   console.log('GOT INTO CHANNELS');
-  items.getChannels(function(err, data) {
-    if(err) {
+  items.getPublicChannels(function(err, publicData) {
+    if (err) {
       console.log('WE ARE SCREWED AT /channels');
       res.sendStatus(500);
     } else {
-      res.json(data.channels);
+      res.json(publicData.channels);
     }
   });
 });
@@ -29,7 +29,7 @@ app.get('/messages', function(req, res) {
   var channel = req.query.channel;
   console.log('GOT INTO MESSAGES');
   items.getMessages(channel, function(err, data) {
-    if(err) {
+    if (err) {
       console.log('WE ARE SCREWED AT /messages');
       res.sendStatus(500);
     } else {

@@ -16,14 +16,13 @@ class Main extends React.Component {
   }
 
   getMessages() {
-    const that = this;
     $.ajax({
       method: 'GET',
       url: '/messages',
-      data: {channel: that.state.currentChannel.id},
+      data: {channel: this.state.currentChannel.id},
       success: (data) => {
         console.log(data);
-        that.setState({
+        this.setState({
           messages: data
         })
       },
