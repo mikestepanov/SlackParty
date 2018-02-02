@@ -4,13 +4,6 @@ var config = require('../config.js');
 
 var token = config.token;
 
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : '',
-  database : 'test'
-});
-
 var getPublicChannels = function(callback) {
   var base = 'https://slack.com/api/channels.list';
   var url = `${base}?token=${token}`;
