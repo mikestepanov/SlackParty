@@ -13,9 +13,7 @@ class Shattarah extends Component {
 
   render () {
     return (
-      <Router>
         <Main />
-      </Router>
     );
   }
 }

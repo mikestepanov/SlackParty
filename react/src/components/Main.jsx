@@ -13,6 +13,7 @@ class Main extends React.Component {
 
     this.getMessages = this.getMessages.bind(this);
     this.onChannelChange = this.onChannelChange.bind(this);
+    this.memeIt = this.memeIt.bind(this);
   }
 
   getMessages() {
@@ -25,6 +26,21 @@ class Main extends React.Component {
         this.setState({
           messages: data
         })
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    });
+  }
+
+  memeIt(event) {
+    $.ajax({
+      method: 'POST',
+      url: '/memeIt',
+      contentType: 'application/json',
+      data: JSON.stringify({message: this.state.messages[event.target.className]}),
+      success: (data) => {
+        console.log('ez', data);
       },
       error: (err) => {
         console.log('err', err);
@@ -47,7 +63,7 @@ class Main extends React.Component {
         <Channels onChannelChange={this.onChannelChange}/>
         <ul>
           {this.state.messages.map((message, idx) =>
-            <li key={idx}>{message.text}</li>
+            <li key={idx} className={idx} onClick={this.memeIt}>{message.text}</li>
           )}
         </ul>
       </div>

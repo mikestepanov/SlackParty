@@ -14,7 +14,6 @@ app.listen(port, function() {
 });
 
 app.get('/channels', function(req, res) {
-  console.log('GOT INTO CHANNELS');
   db.getPublicChannels(function(err, publicData) {
     if (err) {
       console.log('WE ARE SCREWED AT /channels');
@@ -27,13 +26,23 @@ app.get('/channels', function(req, res) {
 
 app.get('/messages', function(req, res) {
   var channel = req.query.channel;
-  console.log('GOT INTO MESSAGES');
   db.getMessages(channel, function(err, data) {
     if (err) {
       console.log('WE ARE SCREWED AT /messages');
       res.sendStatus(500);
     } else {
       res.json(data.messages);
+    }
+  });
+});
+
+app.post('/memeIt', function(req, res) {
+  db.memeIt(req.body, function(err, data) {
+    if (err) {
+      console.log('WE ARE SCREWED AT /memeIt');
+      res.sendStatus(500);
+    } else {
+      res.json('ez');
     }
   });
 });
