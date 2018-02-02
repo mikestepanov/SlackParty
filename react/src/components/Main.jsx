@@ -38,7 +38,7 @@ class Main extends React.Component {
       method: 'POST',
       url: '/memeIt',
       contentType: 'application/json',
-      data: JSON.stringify({message: this.state.messages[event.target.className]}),
+      data: JSON.stringify({channel: this.state.currentChannel.id, message: this.state.messages[event.target.value]}),
       success: (data) => {
         console.log('ez', data);
       },

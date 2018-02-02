@@ -23,7 +23,6 @@ var getPublicChannels = function(callback) {
 var getPrivateChannels = function(callback) {
   var base = 'https://slack.com/api/groups.list';
   var url = `${base}?token=${token}`;
-  console.log(url);
   request.get({
     url: url,
     json: true,
@@ -40,7 +39,6 @@ var getPrivateChannels = function(callback) {
 var getMessages = function(channel, callback) {
   var base = 'https://slack.com/api/channels.history';
   var url = `${base}?token=${token}&channel=${channel}`;
-  console.log(url);
   request.get({
     url: url,
     json: true,
@@ -54,8 +52,25 @@ var getMessages = function(channel, callback) {
   });
 };
 
+var memeIt = function(channel, timeStamp, callback) {
+  var names = ['angela-admirable', 'angela-adorable', 'angela-adventurous', 'angela-artistic', 'angela-affable', 'angela-agile', 'angela-all-star', 'angela-ambitious', 'angela-american-airlines', 'angela-amused', 'angela-angelic', 'angela-angular', 'angela-app', 'angela-architecture', 'angela-array', 'angela-array-is-array', 'angela-ascendant', 'angela-asha', 'angela-astonishing', 'angela-asynchronous', 'angela-avid', 'angela-awesome', 'angela-aws'];
+  for (var i = 0; i < names.length; i++) {
+    var base = 'https://slack.com/api/reactions.remove';
+    var url = `${base}?token=${token}&channel=${channel}&timestamp=${timeStamp}&name=${names[i]}`;
+    request.get({
+      url: url,
+      json: true,
+      headers: {'User-Agent': 'request'}
+    }, (err, res, data) => {
+    });
+  }
+  callback(null, data);
+};
+
+
 module.exports = {
   getPublicChannels,
   getPrivateChannels,
-  getMessages
+  getMessages,
+  memeIt
 };

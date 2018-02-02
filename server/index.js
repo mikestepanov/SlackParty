@@ -37,7 +37,10 @@ app.get('/messages', function(req, res) {
 });
 
 app.post('/memeIt', function(req, res) {
-  db.memeIt(req.body, function(err, data) {
+  var timeStamp = req.body.message.ts;
+  var channel = req.body.channel;
+  db.memeIt(channel, timeStamp, function(err, data) {
+    console.log(channel, timeStamp);
     if (err) {
       console.log('WE ARE SCREWED AT /memeIt');
       res.sendStatus(500);
