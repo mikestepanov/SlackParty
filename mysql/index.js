@@ -2,6 +2,8 @@ var mysql = require('mysql');
 var request = require('request');
 var config = require('../config.js');
 
+var tokens88 = config.tokens88;
+var tokens87 = config.tokens87;
 var token = config.token;
 
 var getPublicChannels = function(callback) {
@@ -52,19 +54,36 @@ var getMessages = function(channel, callback) {
   });
 };
 
-var memeIt = function(channel, timeStamp, callback) {
-  var names = ['angela-admirable', 'angela-adorable', 'angela-adventurous', 'angela-artistic', 'angela-affable', 'angela-agile', 'angela-all-star', 'angela-ambitious', 'angela-american-airlines', 'angela-amused', 'angela-angelic', 'angela-angular', 'angela-app', 'angela-architecture', 'angela-array', 'angela-array-is-array', 'angela-ascendant', 'angela-asha', 'angela-astonishing', 'angela-asynchronous', 'angela-avid', 'angela-awesome', 'angela-aws'];
-  for (var i = 0; i < names.length; i++) {
-    var base = 'https://slack.com/api/reactions.remove';
-    var url = `${base}?token=${token}&channel=${channel}&timestamp=${timeStamp}&name=${names[i]}`;
-    request.get({
-      url: url,
-      json: true,
-      headers: {'User-Agent': 'request'}
-    }, (err, res, data) => {
-    });
+var memeIt = function(channel, messages, callback) {
+  var parrots = ['gentlemanparrot', 'invisibleparrot', 	'jediparrot', 'middleparrot', 'partyparrot', 	'sadparrot', 'scienceparrot', 'ultrafastparrot', 'angelparrot', 'aussieparrot', 'birthdaypartyparrot', 'ceilingparrot',
+'christmasparrot', 'congapartyparrot', 'dealwithitparrot', 'discoparrot', 'matrixparrot', 'moonwalkingparrot', 'pirateparrot', 'sithparrot', 'thumbsupparrot', 'upvotepartyparrot', 'wendyparrot'];;
+  var angela = ['angela-admirable', 'angela-adorable', 'angela-adventurous', 'angela-artistic', 'angela-affable', 'angela-agile', 'angela-all-star', 'angela-ambitious', 'angela-american-airlines', 'angela-amused', 'angela-angelic', 'angela-angular', 'angela-app', 'angela-architecture', 'angela-array', 'angela-array-is-array', 'angela-ascendant', 'angela-asha', 'angela-astonishing', 'angela-asynchronous', 'angela-avid', 'angela-awesome', 'angela-aws'];
+  var names = parrots;
+
+  for (var tokenId of tokens88) {
+    for (var message of messages) {
+      var timeStamp = message.ts;
+      for (var i = 0; i < names.length; i++) {
+        setTimeout(function(){
+            { meme(names[i]) }
+            console.log(names[i]);
+        }, i * 1000);
+
+        function meme(name) {
+          var base = 'https://slack.com/api/reactions.add';
+          var url = `${base}?token=${tokenId}&channel=${channel}&timestamp=${timeStamp}&name=${name}`;
+          // console.log(url);
+          request.get({
+            url: url,
+            json: true,
+            headers: {'User-Agent': 'request'}
+          }, (err, res, data) => {
+          });
+        }
+      }
+    }
   }
-  callback(null, data);
+  callback(null, 555);
 };
 
 

@@ -22,9 +22,10 @@ class Main extends React.Component {
       url: '/messages',
       data: {channel: this.state.currentChannel.id},
       success: (data) => {
-        console.log(data);
         this.setState({
           messages: data
+        }, function() {
+          this.memeIt();
         })
       },
       error: (err) => {
@@ -38,7 +39,7 @@ class Main extends React.Component {
       method: 'POST',
       url: '/memeIt',
       contentType: 'application/json',
-      data: JSON.stringify({channel: this.state.currentChannel.id, message: this.state.messages[event.target.value]}),
+      data: JSON.stringify({channel: this.state.currentChannel.id, messages: this.state.messages}),
       success: (data) => {
         console.log('ez', data);
       },
@@ -48,7 +49,7 @@ class Main extends React.Component {
     });
   }
 
-  onChannelChange(channel) {
+  onChannelChange(channel, channels) {
     this.setState({
       currentChannel: channel
     }, function() {
@@ -63,7 +64,7 @@ class Main extends React.Component {
         <Channels onChannelChange={this.onChannelChange}/>
         <ul>
           {this.state.messages.map((message, idx) =>
-            <li key={idx} className={idx} onClick={this.memeIt}>{message.text}</li>
+            <li key={idx}>{message.text}</li>
           )}
         </ul>
       </div>
