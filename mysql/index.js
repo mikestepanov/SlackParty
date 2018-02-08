@@ -60,27 +60,31 @@ var memeIt = function(channel, messages, callback) {
   var names = parrots;
   var time = Date.now();
   for (var tokenId of tokens88) {
-    for (var message of messages) {
-      var timeStamp = message.ts;
+    for (var j = 0; j < messages.length; j++) {
+      var timeStamp = messages[j].ts;
       for (var i = 0; i < names.length; i++) {
-        doSetTimeout(i, names[i], timeStamp, tokenId);
+        doSetTimeout(names[i], timeStamp, tokenId, i, j);
       }
     }
   }
 
-  function doSetTimeout(i, name, timeStamp, tokenId) {
-    setTimeout(function() { meme(name, timeStamp, tokenId) }, i * 1000);
+  function doSetTimeout(name, timeStamp, tokenId, i, j) {
+    setTimeout(function() { meme(name, timeStamp, tokenId) }, i * 100 + j * 2300);
   }
 
   function meme(name, timeStamp, tokenId) {
     var base = 'https://slack.com/api/reactions.add';
     var url = `${base}?token=${tokenId}&channel=${channel}&timestamp=${timeStamp}&name=${name}`;
-    console.log(url);
     request.get({
       url: url,
       json: true,
       headers: {'User-Agent': 'request'}
     }, (err, res, data) => {
+      if (err) {
+        console.log('err');
+      } else {
+        console.log(data);
+      }
     });
   }
   callback(null, 555);

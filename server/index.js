@@ -4,7 +4,7 @@ var db = require('../mysql');
 
 var app = express();
 app.use(express.static(__dirname + '/../react/dist'));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
 var port = process.env.PORT || 3000;
 
 app.listen(port, function() {
