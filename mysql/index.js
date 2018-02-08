@@ -2,12 +2,12 @@ var mysql = require('mysql');
 var request = require('request');
 var config = require('../config.js');
 
-var tokens88 = config.tokens88;
-var token = config.token;
+var tokensAll = config.tokens;
+var tokenPrime = tokensAll[0];
 
 var getPublicChannels = function(callback) {
   var base = 'https://slack.com/api/channels.list';
-  var url = `${base}?token=${token}`;
+  var url = `${base}?token=${tokenPrime}`;
   request.get({
     url: url,
     json: true,
@@ -21,9 +21,9 @@ var getPublicChannels = function(callback) {
   });
 };
 
-var getPrivateChannels = function(callback) {
+var getPrivateGroups = function(callback) {
   var base = 'https://slack.com/api/groups.list';
-  var url = `${base}?token=${token}`;
+  var url = `${base}?token=${tokenPrime}`;
   request.get({
     url: url,
     json: true,
@@ -39,7 +39,7 @@ var getPrivateChannels = function(callback) {
 
 var getMessages = function(channel, callback) {
   var base = 'https://slack.com/api/channels.history';
-  var url = `${base}?token=${token}&channel=${channel}`;
+  var url = `${base}?token=${tokenPrime}&channel=${channel}`;
   request.get({
     url: url,
     json: true,
@@ -53,28 +53,28 @@ var getMessages = function(channel, callback) {
   });
 };
 
-var memeIt = function(channel, messages, callback) {
+var memeIt = function(channel, messages, delay, emojiTrain, callback) {
+  // console.log(delay, emojiTrain);
   var parrots = ['gentlemanparrot', 'invisibleparrot', 	'jediparrot', 'middleparrot', 'partyparrot', 	'sadparrot', 'scienceparrot', 'ultrafastparrot', 'angelparrot', 'aussieparrot', 'birthdaypartyparrot', 'ceilingparrot',
 'christmasparrot', 'congapartyparrot', 'dealwithitparrot', 'discoparrot', 'matrixparrot', 'moonwalkingparrot', 'pirateparrot', 'sithparrot', 'thumbsupparrot', 'upvotepartyparrot', 'wendyparrot'];;
-  var angela = ['angela-admirable', 'angela-adorable', 'angela-adventurous', 'angela-artistic', 'angela-affable', 'angela-agile', 'angela-all-star', 'angela-ambitious', 'angela-american-airlines', 'angela-amused', 'angela-angelic', 'angela-angular', 'angela-app', 'angela-architecture', 'angela-array', 'angela-array-is-array', 'angela-ascendant', 'angela-asha', 'angela-astonishing', 'angela-asynchronous', 'angela-avid', 'angela-awesome', 'angela-aws'];
-  var names = parrots;
-  var time = Date.now();
-  for (var tokenId of tokens88) {
+  var emojiTrain = emojiTrain || parrots;
+  var delay = delay || 100;
+  for (var tokenId of tokensAll) {
     for (var j = 0; j < messages.length; j++) {
       var timeStamp = messages[j].ts;
-      for (var i = 0; i < names.length; i++) {
-        doSetTimeout(names[i], timeStamp, tokenId, i, j);
+      for (var i = 0; i < emojiTrain.length; i++) {
+        doSetTimeout(emojiTrain[i], timeStamp, tokenId, i, j, delay, emojiTrain.length);
       }
     }
   }
 
-  function doSetTimeout(name, timeStamp, tokenId, i, j) {
-    setTimeout(function() { meme(name, timeStamp, tokenId) }, i * 100 + j * 2300);
+  function doSetTimeout(emojiName, timeStamp, tokenId, i, j, delay, emojiesLength) {
+    setTimeout(function() { meme(emojiName, timeStamp, tokenId) }, i * delay + j * (emojiesLength * delay));
   }
 
-  function meme(name, timeStamp, tokenId) {
+  function meme(emojiName, timeStamp, tokenId) {
     var base = 'https://slack.com/api/reactions.add';
-    var url = `${base}?token=${tokenId}&channel=${channel}&timestamp=${timeStamp}&name=${name}`;
+    var url = `${base}?token=${tokenId}&channel=${channel}&timestamp=${timeStamp}&name=${emojiName}`;
     request.get({
       url: url,
       json: true,
@@ -93,7 +93,7 @@ var memeIt = function(channel, messages, callback) {
 
 module.exports = {
   getPublicChannels,
-  getPrivateChannels,
+  getPrivateGroups,
   getMessages,
   memeIt
 };

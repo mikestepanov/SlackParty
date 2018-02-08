@@ -37,7 +37,9 @@ app.get('/messages', function(req, res) {
 app.post('/memeIt', function(req, res) {
   var messages = req.body.messages;
   var channel = req.body.channel;
-  db.memeIt(channel, messages, function(err, data) {
+  var delay = req.body.delay;
+  var emojiTrain = req.body.emojiTrain;
+  db.memeIt(channel, messages, delay, emojiTrain, function(err, data) {
     if (err) {
       console.log('WE ARE SCREWED AT /memeIt');
       res.sendStatus(500);
