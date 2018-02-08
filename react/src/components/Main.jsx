@@ -24,9 +24,7 @@ class Main extends React.Component {
       success: (data) => {
         this.setState({
           messages: data
-        }, function() {
-          this.memeIt();
-        })
+        });
       },
       error: (err) => {
         console.log('err', err);
@@ -34,7 +32,7 @@ class Main extends React.Component {
     });
   }
 
-  memeIt(event) {
+  memeIt() {
     $.ajax({
       method: 'POST',
       url: '/memeIt',
@@ -62,6 +60,7 @@ class Main extends React.Component {
       <div>
         <h5>Channel ID: {this.state.currentChannel.id}</h5>
         <Channels onChannelChange={this.onChannelChange}/>
+        <button onClick={this.memeIt}>Meme This Channel</button>
         <ul>
           {this.state.messages.map((message, idx) =>
             <li key={idx}>{message.text}</li>

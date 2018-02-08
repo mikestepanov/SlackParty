@@ -1,10 +1,8 @@
 var express = require('express');
-var helmet = require('helmet');
 var bodyParser = require('body-parser');
 var db = require('../mysql');
 
 var app = express();
-app.use(helmet());
 app.use(express.static(__dirname + '/../react/dist'));
 app.use(bodyParser.json());
 var port = process.env.PORT || 3000;
