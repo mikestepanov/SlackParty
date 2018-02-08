@@ -1,7 +1,3 @@
-li {
-  list-style-type: none;
-}
-
-* {
-  box-sizing: none;
-}
+@import 'base/index';
+@import 'utilities/index';
+@import 'components/index';

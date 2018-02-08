@@ -1,1 +1,1 @@
-exports.token = '';
+exports.tokens = [];

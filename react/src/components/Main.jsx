@@ -13,6 +13,7 @@ class Main extends React.Component {
 
     this.getMessages = this.getMessages.bind(this);
     this.onChannelChange = this.onChannelChange.bind(this);
+    this.memeIt = this.memeIt.bind(this);
   }
 
   getMessages() {
@@ -21,10 +22,9 @@ class Main extends React.Component {
       url: '/messages',
       data: {channel: this.state.currentChannel.id},
       success: (data) => {
-        console.log(data);
         this.setState({
           messages: data
-        })
+        });
       },
       error: (err) => {
         console.log('err', err);
@@ -32,7 +32,22 @@ class Main extends React.Component {
     });
   }
 
-  onChannelChange(channel) {
+  memeIt() {
+    $.ajax({
+      method: 'POST',
+      url: '/memeIt',
+      contentType: 'application/json',
+      data: JSON.stringify({channel: this.state.currentChannel.id, messages: this.state.messages}),
+      success: (data) => {
+        console.log('ez', data);
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    });
+  }
+
+  onChannelChange(channel, channels) {
     this.setState({
       currentChannel: channel
     }, function() {
@@ -45,6 +60,7 @@ class Main extends React.Component {
       <div>
         <h5>Channel ID: {this.state.currentChannel.id}</h5>
         <Channels onChannelChange={this.onChannelChange}/>
+        <button onClick={this.memeIt}>Meme This Channel</button>
         <ul>
           {this.state.messages.map((message, idx) =>
             <li key={idx}>{message.text}</li>

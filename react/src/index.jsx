@@ -1,24 +1,21 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+
 import Main from './components/Main.jsx';
 
-class App extends React.Component {
+class Shattarah extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
 
     }
-
   }
 
   render () {
     return (
-      <div>
-        <Main/>
-      </div>
+        <Main />
     );
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<Shattarah />, document.getElementById('shattarah'));
