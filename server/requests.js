@@ -67,8 +67,8 @@ var memeIt = function(channel, messages, delay, emojiTrain, callback) {
     }
   }
 
-  function doSetTimeout(emojiName, timeStamp, tokenId, i, j, delay, emojiesLength) {
-    setTimeout(function() { meme(emojiName, timeStamp, tokenId) }, i * delay + j * (emojiesLength * delay));
+  function doSetTimeout(emojiName, timeStamp, tokenId, i, j, delay, emojisLength) {
+    setTimeout(function() { meme(emojiName, timeStamp, tokenId) }, i * delay + j * (emojisLength * delay));
   }
 
   function meme(emojiName, timeStamp, tokenId) {
