@@ -1,6 +1,11 @@
-node_modules
+### Configs ###
 config.js
+
+### Node ###
+node_modules
+
+### React ###
 bundle.js
+
+### OSX ###
 .DS_Store
-.sass-cache
-styles.css.map
