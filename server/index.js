@@ -1,6 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var db = require('../mysql');
+var requests = require('./requests');
 
 var app = express();
 app.use(express.static(__dirname + '/../react/dist'));
@@ -12,7 +12,7 @@ app.listen(port, function() {
 });
 
 app.get('/channels', function(req, res) {
-  db.getPublicChannels(function(err, publicData) {
+  requests.getPublicChannels(function(err, publicData) {
     if (err) {
       console.log('WE ARE SCREWED AT /channels');
       res.sendStatus(500);
@@ -24,7 +24,7 @@ app.get('/channels', function(req, res) {
 
 app.get('/messages', function(req, res) {
   var channel = req.query.channel;
-  db.getMessages(channel, function(err, data) {
+  requests.getMessages(channel, function(err, data) {
     if (err) {
       console.log('WE ARE SCREWED AT /messages');
       res.sendStatus(500);
@@ -39,7 +39,7 @@ app.post('/memeIt', function(req, res) {
   var channel = req.body.channel;
   var delay = req.body.delay;
   var emojiTrain = req.body.emojiTrain;
-  db.memeIt(channel, messages, delay, emojiTrain, function(err, data) {
+  requests.memeIt(channel, messages, delay, emojiTrain, function(err, data) {
     if (err) {
       console.log('WE ARE SCREWED AT /memeIt');
       res.sendStatus(500);

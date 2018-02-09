@@ -1,4 +1,3 @@
-var mysql = require('mysql');
 var request = require('request');
 var config = require('../config.js');
 
