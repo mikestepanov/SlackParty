@@ -8,7 +8,7 @@ app.use(bodyParser.json({limit: '50mb'}));
 var port = process.env.PORT || 3000;
 
 app.listen(port, function() {
-  console.log('listening on port 3000!');
+  console.log(`listening on port ${port}!`);
 });
 
 app.get('/channels', function(req, res) {

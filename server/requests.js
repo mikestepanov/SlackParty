@@ -56,8 +56,9 @@ var memeIt = function(channel, messages, delay, emojiTrain, callback) {
   // console.log(delay, emojiTrain);
   var parrots = ['gentlemanparrot', 'invisibleparrot', 	'jediparrot', 'middleparrot', 'partyparrot', 	'sadparrot', 'scienceparrot', 'ultrafastparrot', 'angelparrot', 'aussieparrot', 'birthdaypartyparrot', 'ceilingparrot',
 'christmasparrot', 'congapartyparrot', 'dealwithitparrot', 'discoparrot', 'matrixparrot', 'moonwalkingparrot', 'pirateparrot', 'sithparrot', 'thumbsupparrot', 'upvotepartyparrot', 'wendyparrot'];;
-  var emojiTrain = emojiTrain || parrots;
-  var delay = delay || 100;
+  var fred = ['fred-fabulous', 'fred-fair', 'fred-fancy', 'fred-fantabulous', 'fred-fantastic', 'fred-fine', 'fred-flawless', 'fred-flexible', 'fred-fredness', 'fred-fast', 'fred-faster', 'fred-fastest', 'fred-fisherman', 'fred-firefighter', 'fred-fjord', 'fred-functional', 'fred-frozen', 'fred-fries', 'fred-flexbox', 'fred-font-face', 'fred-frappuccino', 'fredmoji', 'fred-friend'];
+  var emojiTrain = emojiTrain || fred;
+  var delay = delay || 50;
   for (var tokenId of tokensAll) {
     for (var j = 0; j < messages.length; j++) {
       var timeStamp = messages[j].ts;
