@@ -5,10 +5,10 @@ var requests = require('./requests');
 var app = express();
 app.use(express.static(__dirname + '/../react/dist'));
 app.use(bodyParser.json({limit: '50mb'}));
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3333;
 
 app.listen(port, function() {
-  console.log(`listening on port ${port}!`);
+  console.log(`127.0.0.1:${port}`);
 });
 
 app.get('/channels', function(req, res) {
