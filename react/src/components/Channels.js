@@ -9,17 +9,15 @@ class Channels extends React.Component {
       channels: [],
       selectedChannel: {},
     }
-
-    this.onChannelChange = this.onChannelChange.bind(this)
   }
 
-  componentWillMount() {
+  componentDidMount() {
     $.ajax({
       method: 'GET',
       url: '/channels',
       success: data => {
-        var filteredData = []
-        for (var channel of data) {
+        let filteredData = []
+        for (let channel of data) {
           if (!channel.is_archived) {
             filteredData.push(channel)
           }
@@ -29,7 +27,7 @@ class Channels extends React.Component {
             channels: filteredData,
             selectedChannel: filteredData[0],
           },
-          function() {
+          () => {
             this.props.onChannelChange(this.state.selectedChannel)
           },
         )
@@ -41,7 +39,7 @@ class Channels extends React.Component {
   }
 
   onChannelChange(event) {
-    for (var channel of this.state.channels) {
+    for (let channel of this.state.channels) {
       if (channel.name === event.target.value) {
         this.setState(
           {
@@ -59,7 +57,7 @@ class Channels extends React.Component {
     return (
       <div id="channels">
         <span> Channels: </span>
-        <select onChange={this.onChannelChange}>
+        <select onChange={() => this.onChannelChange()}>
           {this.state.channels.map(channel => (
             <option key={channel.id}>{channel.name}</option>
           ))}

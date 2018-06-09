@@ -10,10 +10,6 @@ class Main extends React.Component {
       currentChannel: {},
       messages: [],
     }
-
-    this.getMessages = this.getMessages.bind(this)
-    this.onChannelChange = this.onChannelChange.bind(this)
-    this.memeIt = this.memeIt.bind(this)
   }
 
   getMessages() {
@@ -55,7 +51,7 @@ class Main extends React.Component {
       {
         currentChannel: channel,
       },
-      function() {
+      () => {
         this.getMessages()
       },
     )
@@ -65,8 +61,8 @@ class Main extends React.Component {
     return (
       <div>
         <h5>Channel ID: {this.state.currentChannel.id}</h5>
-        <Channels onChannelChange={this.onChannelChange} />
-        <button onClick={this.memeIt}>Meme This Channel</button>
+        <Channels onChannelChange={() => this.onChannelChange()} />
+        <button onClick={() => this.memeIt()}>Meme This Channel</button>
         <ul>
           {this.state.messages.map((message, idx) => (
             <li key={idx}>{message.text}</li>
