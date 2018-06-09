@@ -6,14 +6,15 @@ var bot = new SlackBot({
   name: 'jokebot132',
 })
 
+var params = {
+  icon_emoji: ':cat:',
+}
+
 bot.on('start', () => {
   // more information about additional params https://api.slack.com/methods/chat.postMessage
-  var params = {
-    icon_emoji: ':cat:',
-  }
 
   // define channel, where bot exist. You can adjust it there https://my.slack.com/services
-  bot.postMessageToChannel('general', 'meow!', params)
+  // bot.postMessageToChannel('general', 'reloaded', params)
 
   // define existing username instead of 'user_name'
   bot.postMessageToUser('user_name', 'meow!', params)
@@ -28,3 +29,23 @@ bot.on('start', () => {
   // define private group instead of 'private_group', where bot exist
   bot.postMessageToGroup('private_group', 'meow!', params)
 })
+
+bot.on('error', error => {
+  console.log('error => ', error)
+})
+
+bot.on('message', data => {
+  if (data.type !== 'message' || data.username === bot.name) {
+    return
+  }
+
+  console.log('message => ', data)
+  handleMessage(data.text, data.channel)
+})
+
+const handleMessage = (message, channel) => {
+  console.log(message, channel)
+  if (message.includes(' chucknorris')) {
+    bot.postMessageToChannel('general', 'chucknorris joke', params)
+  }
+}
