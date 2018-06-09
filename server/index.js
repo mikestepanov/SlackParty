@@ -12,12 +12,12 @@ app.listen(port, function() {
 })
 
 app.get('/channels', function(req, res) {
-  requests.getPublicChannels(function(err, publicData) {
+  requests.getPublicChannels(function(err, data) {
     if (err) {
       console.log('WE ARE SCREWED AT /channels')
       res.sendStatus(500)
     } else {
-      res.json(publicData.channels)
+      res.json(data.channels)
     }
   })
 })

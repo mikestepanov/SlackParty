@@ -52,21 +52,21 @@ class Main extends React.Component {
         currentChannel: channel,
       },
       () => {
+        console.log(channel, channels)
         this.getMessages()
       },
     )
   }
 
   render() {
+    const { messages, currentChannel } = this.state
     return (
       <div>
-        <h5>Channel ID: {this.state.currentChannel.id}</h5>
+        <h5>Channel ID: {currentChannel ? currentChannel.id : 'loading'}</h5>
         <Channels onChannelChange={() => this.onChannelChange()} />
         <button onClick={() => this.memeIt()}>Meme This Channel</button>
         <ul>
-          {this.state.messages.map((message, idx) => (
-            <li key={idx}>{message.text}</li>
-          ))}
+          {messages.map((message, idx) => <li key={idx}>{message.text}</li>)}
         </ul>
       </div>
     )

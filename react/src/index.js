@@ -5,4 +5,4 @@ import Main from './components/Main'
 
 const App = () => <Main />
 
-ReactDOM.render(<App />, document.getElementById('shattarah'))
+ReactDOM.render(<App />, document.getElementById('app'))

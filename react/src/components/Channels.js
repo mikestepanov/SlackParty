@@ -54,11 +54,12 @@ class Channels extends React.Component {
   }
 
   render() {
+    const { channels } = this.state
     return (
       <div id="channels">
         <span> Channels: </span>
         <select onChange={() => this.onChannelChange()}>
-          {this.state.channels.map(channel => (
+          {channels.map(channel => (
             <option key={channel.id}>{channel.name}</option>
           ))}
         </select>
