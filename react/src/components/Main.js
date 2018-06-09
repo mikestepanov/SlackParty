@@ -1,6 +1,6 @@
 import React from 'react'
 import $ from 'jquery'
-import Channels from './Channels.jsx'
+import Channels from './Channels'
 
 class Main extends React.Component {
   constructor(props) {
