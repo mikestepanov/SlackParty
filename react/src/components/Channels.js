@@ -58,7 +58,7 @@ class Channels extends React.Component {
     return (
       <div id="channels">
         <span> Channels: </span>
-        <select onChange={() => this.onChannelChange()}>
+        <select onChange={e => this.onChannelChange(e)}>
           {channels.map(channel => (
             <option key={channel.id}>{channel.name}</option>
           ))}

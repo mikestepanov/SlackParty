@@ -53,7 +53,9 @@ class Main extends React.Component {
       },
       () => {
         console.log(channel, channels)
-        this.getMessages()
+        if (channel) {
+          this.getMessages()
+        }
       },
     )
   }

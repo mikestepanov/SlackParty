@@ -17,6 +17,7 @@ app.get('/channels', function(req, res) {
       console.log('WE ARE SCREWED AT /channels')
       res.sendStatus(500)
     } else {
+      console.log(data.channels)
       res.json(data.channels)
     }
   })
