@@ -8,6 +8,7 @@
   "scripts": {
     "start":
       "nodemon server/index.js --exec babel-node --presets es2015,stage-2",
+    "bot": "nodemon index.js --exec babel-node --presets es2015,stage-2",
     "dev": "npm run react-dev & npm run server-dev",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js"
@@ -35,6 +36,7 @@
     "react-router-dom": "^4.2.2",
     "redux": "^4.0.0",
     "request": "^2.87.0",
+    "slackbots": "^1.1.0",
     "webpack-cli": "^3.0.3"
   }
 }
