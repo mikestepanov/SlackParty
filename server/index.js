@@ -51,4 +51,6 @@ app.post('/memeIt', function(req, res) {
   })
 })
 
-app.post('/slack', (req, res) => {})
+app.get('/slackauth', (req, res) => {
+  res.json('sucess')
+})
