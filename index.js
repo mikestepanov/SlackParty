@@ -45,12 +45,21 @@ const handleMessage = (message, channel) => {
   console.log(message, channel)
   if (message.includes(' chucknorris')) {
     makeChuckNorrisJoke('general')
+  } else if (message.includes(' yomama')) {
+    makeYoMamaJoke('general')
   }
 }
 
 const makeChuckNorrisJoke = channel => {
   axios('http://api.icndb.com/jokes/random').then(result => {
     const joke = result.data.value.joke
+    bot.postMessageToChannel(channel, joke, botParams)
+  })
+}
+
+const makeYoMamaJoke = channel => {
+  axios('http://api.yomomma.info').then(result => {
+    const joke = result.data.joke
     bot.postMessageToChannel(channel, joke, botParams)
   })
 }
