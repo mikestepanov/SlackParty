@@ -1,9 +1,11 @@
 var SlackBot = require('slackbots')
 var axios = require('axios')
+var config = require('../config.js')
 
 // create a bot
 const bot = new SlackBot({
-  token: 'xoxb-379718967319-379735942519-MLyjkIVgrpd6cbzYyHqTkyg2',
+  // token: config.rend, //rend
+  token: config.fmbm, //fmbm
   name: 'Ragnaros, the Firelord',
 })
 
@@ -49,6 +51,8 @@ const handleMessage = (message, channel) => {
     makeYoMommaJoke('general')
   } else if (message.includes(' random')) {
     makeRandomJoke('general')
+  } else if (message.includes(' bye')) {
+    sayGoodbye('general')
   }
 }
 
@@ -73,6 +77,10 @@ const makeRandomJoke = channel => {
   } else {
     makeYoMommaJoke('general')
   }
+}
+
+const sayGoodbye = channel => {
+  bot.postMessageToChannel(channel, 'cya', botParams)
 }
 
 module.exports = bot
