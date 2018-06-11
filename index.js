@@ -43,10 +43,12 @@ bot.on('message', data => {
 
 const handleMessage = (message, channel) => {
   console.log(message, channel)
-  if (message.includes(' chucknorris')) {
+  if (message.includes(' chucknorris') || message.includes(' Chuck Norris')) {
     makeChuckNorrisJoke('general')
-  } else if (message.includes(' yomama')) {
+  } else if (message.includes(' yomama') || message.includes(' Yo Mamma')) {
     makeYoMamaJoke('general')
+  } else if (message.includes(' random')) {
+    makeRandomJoke('general')
   }
 }
 
@@ -62,4 +64,13 @@ const makeYoMamaJoke = channel => {
     const joke = result.data.joke
     bot.postMessageToChannel(channel, joke, botParams)
   })
+}
+
+const makeRandomJoke = channel => {
+  const rand = Math.round(Math.random())
+  if (rand === 0) {
+    makeChuckNorrisJoke('general')
+  } else {
+    makeYoMamaJoke('general')
+  }
 }
