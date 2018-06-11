@@ -1,13 +1,14 @@
 var SlackBot = require('slackbots')
+var axios = require('axios')
 
 // create a bot
 var bot = new SlackBot({
   token: 'xoxb-379718967319-379735942519-MLyjkIVgrpd6cbzYyHqTkyg2',
-  name: 'jokebot132',
+  name: 'Ragnaros, the Firelord',
 })
 
-var params = {
-  icon_emoji: ':cat:',
+var botParams = {
+  slackbot: true,
 }
 
 bot.on('start', () => {
@@ -17,17 +18,14 @@ bot.on('start', () => {
   // bot.postMessageToChannel('general', 'reloaded', params)
 
   // define existing username instead of 'user_name'
-  bot.postMessageToUser('user_name', 'meow!', params)
+  bot.postMessageToUser('user_name', 'meow!', botParams)
 
   // If you add a 'slackbot' property,
   // you will post to another user's slackbot channel instead of a direct message
-  bot.postMessageToUser('user_name', 'meow!', {
-    slackbot: true,
-    icon_emoji: ':cat:',
-  })
+  bot.postMessageToUser('user_name', 'meow!', botParams)
 
   // define private group instead of 'private_group', where bot exist
-  bot.postMessageToGroup('private_group', 'meow!', params)
+  bot.postMessageToGroup('private_group', 'meow!', botParams)
 })
 
 bot.on('error', error => {
@@ -46,6 +44,13 @@ bot.on('message', data => {
 const handleMessage = (message, channel) => {
   console.log(message, channel)
   if (message.includes(' chucknorris')) {
-    bot.postMessageToChannel('general', 'chucknorris joke', params)
+    makeChuckNorrisJoke('general')
   }
+}
+
+const makeChuckNorrisJoke = channel => {
+  axios('http://api.icndb.com/jokes/random').then(result => {
+    const joke = result.data.value.joke
+    bot.postMessageToChannel(channel, joke, botParams)
+  })
 }
