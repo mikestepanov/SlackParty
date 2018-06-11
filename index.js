@@ -45,8 +45,8 @@ const handleMessage = (message, channel) => {
   console.log(message, channel)
   if (message.includes(' chucknorris') || message.includes(' Chuck Norris')) {
     makeChuckNorrisJoke('general')
-  } else if (message.includes(' yomama') || message.includes(' Yo Mamma')) {
-    makeYoMamaJoke('general')
+  } else if (message.includes(' yomomma') || message.includes(' Yo Momma')) {
+    makeYoMommaJoke('general')
   } else if (message.includes(' random')) {
     makeRandomJoke('general')
   }
@@ -59,7 +59,7 @@ const makeChuckNorrisJoke = channel => {
   })
 }
 
-const makeYoMamaJoke = channel => {
+const makeYoMommaJoke = channel => {
   axios('http://api.yomomma.info').then(result => {
     const joke = result.data.joke
     bot.postMessageToChannel(channel, joke, botParams)
@@ -71,6 +71,6 @@ const makeRandomJoke = channel => {
   if (rand === 0) {
     makeChuckNorrisJoke('general')
   } else {
-    makeYoMamaJoke('general')
+    makeYoMommaJoke('general')
   }
 }
