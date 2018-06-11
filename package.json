@@ -8,7 +8,6 @@
   "scripts": {
     "start":
       "nodemon server/index.js --exec babel-node --presets es2015,stage-2",
-    "bot": "nodemon index.js --exec babel-node --presets es2015,stage-2",
     "dev": "npm run react-dev & npm run server-dev",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js"
