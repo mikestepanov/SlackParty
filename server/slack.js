@@ -1,10 +1,10 @@
-var SlackBot = require('slackbots')
-var axios = require('axios')
-var config = require('../config.js')
+import slackBot from 'slackbots'
+import axios from 'axios'
+import config from '../config'
 
 // create a bot
-const bot = new SlackBot({
-  token: config.rend, //rend
+const bot = new slackBot({
+  // token: config.rend, //rend
   // token: config.fmbm, //fmbm
   name: 'Ragnaros, the Firelord',
 })
@@ -40,11 +40,10 @@ bot.on('message', data => {
   }
 
   console.log('message => ', data)
-  handleMessage(data.text, data.channel)
+  handleMessage(data.text, data.channel, data)
 })
 
 const handleMessage = (message, channel) => {
-  console.log(message, channel)
   if (message.includes(' chucknorris') || message.includes(' Chuck Norris')) {
     makeChuckNorrisJoke('general')
   } else if (message.includes(' yomomma') || message.includes(' Yo Momma')) {
@@ -80,7 +79,5 @@ const makeRandomJoke = channel => {
 }
 
 const sayGoodbye = channel => {
-  bot.postMessageToChannel(channel, '... Too sooon`', botParams)
+  bot.postMessageToChannel(channel, '... Too sooon', botParams)
 }
-
-module.exports = bot
