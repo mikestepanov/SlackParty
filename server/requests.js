@@ -1,12 +1,12 @@
-var request = require('request')
-var config = require('../config.js')
+import request from 'request'
+import config from '../config.js'
 
-var tokensAll = config.tokens
-var tokenPrime = tokensAll[0]
+const tokensAll = config.tokens
+const tokenPrime = tokensAll[0]
 
-var getPublicChannels = function(callback) {
-  var base = 'https://slack.com/api/channels.list'
-  var url = `${base}?token=${tokenPrime}`
+export const getPublicChannels = callback => {
+  const base = 'https://slack.com/api/channels.list'
+  const url = `${base}?token=${tokenPrime}`
   request.get(
     {
       url: url,
@@ -23,9 +23,9 @@ var getPublicChannels = function(callback) {
   )
 }
 
-var getPrivateGroups = function(callback) {
-  var base = 'https://slack.com/api/groups.list'
-  var url = `${base}?token=${tokenPrime}`
+export const getPrivateGroups = callback => {
+  const base = 'https://slack.com/api/groups.list'
+  const url = `${base}?token=${tokenPrime}`
   request.get(
     {
       url: url,
@@ -42,9 +42,9 @@ var getPrivateGroups = function(callback) {
   )
 }
 
-var getMessages = function(channel, callback) {
-  var base = 'https://slack.com/api/channels.history'
-  var url = `${base}?token=${tokenPrime}&channel=${channel}`
+export const getMessages = (channel, callback) => {
+  const base = 'https://slack.com/api/channels.history'
+  const url = `${base}?token=${tokenPrime}&channel=${channel}`
   request.get(
     {
       url: url,
@@ -61,9 +61,9 @@ var getMessages = function(channel, callback) {
   )
 }
 
-var memeIt = function(channel, messages, delay, emojiTrain, callback) {
+export const memeIt = (channel, messages, delay, emojiTrain, callback) => {
   // console.log(delay, emojiTrain);
-  var parrots = [
+  const parrots = [
     'gentlemanparrot',
     'invisibleparrot',
     'jediparrot',
@@ -88,7 +88,7 @@ var memeIt = function(channel, messages, delay, emojiTrain, callback) {
     'upvotepartyparrot',
     'wendyparrot',
   ]
-  var fred = [
+  const fred = [
     'fred-fabulous',
     'fred-fair',
     'fred-fancy',
@@ -113,12 +113,12 @@ var memeIt = function(channel, messages, delay, emojiTrain, callback) {
     'fredmoji',
     'fred-friend',
   ]
-  var emojiTrain = emojiTrain || fred
-  var delay = delay || 50
-  for (var tokenId of tokensAll) {
-    for (var j = 0; j < messages.length; j++) {
+  emojiTrain = emojiTrain || fred
+  delay = delay || 50
+  for (let tokenId of tokensAll) {
+    for (let j = 0; j < messages.length; j++) {
       var timeStamp = messages[j].ts
-      for (var i = 0; i < emojiTrain.length; i++) {
+      for (let i = 0; i < emojiTrain.length; i++) {
         doSetTimeout(
           emojiTrain[i],
           timeStamp,
@@ -141,14 +141,14 @@ var memeIt = function(channel, messages, delay, emojiTrain, callback) {
     delay,
     emojisLength,
   ) {
-    setTimeout(function() {
+    setTimeout(() => {
       meme(emojiName, timeStamp, tokenId)
     }, i * delay + j * (emojisLength * delay))
   }
 
-  function meme(emojiName, timeStamp, tokenId) {
-    var base = 'https://slack.com/api/reactions.add'
-    var url = `${base}?token=${tokenId}&channel=${channel}&timestamp=${timeStamp}&name=${emojiName}`
+  const meme = (emojiName, timeStamp, tokenId) => {
+    const base = 'https://slack.com/api/reactions.add'
+    const url = `${base}?token=${tokenId}&channel=${channel}&timestamp=${timeStamp}&name=${emojiName}`
     request.get(
       {
         url: url,
@@ -165,11 +165,4 @@ var memeIt = function(channel, messages, delay, emojiTrain, callback) {
     )
   }
   callback(null, 555)
-}
-
-module.exports = {
-  getPublicChannels,
-  getPrivateGroups,
-  getMessages,
-  memeIt,
 }

@@ -1,12 +1,13 @@
 import express from 'express'
 import bodyParser from 'body-parser'
-var requests = require('./requests')
-var slack = require('./slack')
+import requests from './requests'
+import slack from './slack'
 
-var app = express()
+const app = express()
 app.use(express.static(__dirname + '/../react/dist'))
 app.use(bodyParser.json({ limit: '50mb' }))
-var port = process.env.PORT || 7777
+
+const port = process.env.PORT || 7777
 
 app.listen(port, () => {
   console.log(`127.0.0.1:${port}`)
@@ -37,10 +38,10 @@ app.get('/messages', (req, res) => {
 })
 
 app.post('/memeIt', (req, res) => {
-  var messages = req.body.messages
-  var channel = req.body.channel
-  var delay = req.body.delay
-  var emojiTrain = req.body.emojiTrain
+  const messages = req.body.messages
+  const channel = req.body.channel
+  const delay = req.body.delay
+  const emojiTrain = req.body.emojiTrain
   requests.memeIt(channel, messages, delay, emojiTrain, (err, data) => {
     if (err) {
       console.log('WE ARE SCREWED AT /memeIt')
