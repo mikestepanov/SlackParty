@@ -4,8 +4,8 @@ var config = require('../config.js')
 
 // create a bot
 const bot = new SlackBot({
-  // token: config.rend, //rend
-  token: config.fmbm, //fmbm
+  token: config.rend, //rend
+  // token: config.fmbm, //fmbm
   name: 'Ragnaros, the Firelord',
 })
 
@@ -17,7 +17,7 @@ bot.on('start', () => {
   // more information about additional params https://api.slack.com/methods/chat.postMessage
 
   // define channel, where bot exist. You can adjust it there https://my.slack.com/services
-  // bot.postMessageToChannel('general', 'reloaded', params)
+  bot.postMessageToChannel('general', 'I live, insects!', botParams)
 
   // define existing username instead of 'user_name'
   bot.postMessageToUser('user_name', 'meow!', botParams)
@@ -80,7 +80,7 @@ const makeRandomJoke = channel => {
 }
 
 const sayGoodbye = channel => {
-  bot.postMessageToChannel(channel, 'cya', botParams)
+  bot.postMessageToChannel(channel, '... Too sooon`', botParams)
 }
 
 module.exports = bot
