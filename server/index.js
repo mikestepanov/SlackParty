@@ -1,5 +1,5 @@
-var express = require('express')
-var bodyParser = require('body-parser')
+import express from 'express'
+import bodyParser from 'body-parser'
 var requests = require('./requests')
 var slack = require('./slack')
 
@@ -8,12 +8,12 @@ app.use(express.static(__dirname + '/../react/dist'))
 app.use(bodyParser.json({ limit: '50mb' }))
 var port = process.env.PORT || 7777
 
-app.listen(port, function() {
+app.listen(port, () => {
   console.log(`127.0.0.1:${port}`)
 })
 
-app.get('/channels', function(req, res) {
-  requests.getPublicChannels(function(err, data) {
+app.get('/channels', (req, res) => {
+  requests.getPublicChannels((err, data) => {
     if (err) {
       console.log('WE ARE SCREWED AT /channels')
       res.sendStatus(500)
@@ -24,9 +24,9 @@ app.get('/channels', function(req, res) {
   })
 })
 
-app.get('/messages', function(req, res) {
+app.get('/messages', (req, res) => {
   var channel = req.query.channel
-  requests.getMessages(channel, function(err, data) {
+  requests.getMessages(channel, (err, data) => {
     if (err) {
       console.log('WE ARE SCREWED AT /messages')
       res.sendStatus(500)
@@ -36,12 +36,12 @@ app.get('/messages', function(req, res) {
   })
 })
 
-app.post('/memeIt', function(req, res) {
+app.post('/memeIt', (req, res) => {
   var messages = req.body.messages
   var channel = req.body.channel
   var delay = req.body.delay
   var emojiTrain = req.body.emojiTrain
-  requests.memeIt(channel, messages, delay, emojiTrain, function(err, data) {
+  requests.memeIt(channel, messages, delay, emojiTrain, (err, data) => {
     if (err) {
       console.log('WE ARE SCREWED AT /memeIt')
       res.sendStatus(500)

@@ -6,8 +6,7 @@
   "author": "Mikhail Stepanov",
   "license": "UNLICENSED",
   "scripts": {
-    "start":
-      "nodemon server/index.js --exec babel-node --presets es2015,stage-2",
+    "start": "nodemon server/index.js --exec babel-node --presets env",
     "dev": "npm run react-dev & npm run server-dev",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js"
@@ -17,9 +16,7 @@
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.7.0",
-    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.23.0",
-    "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.7.2",
     "redux-devtools": "^3.4.1",
     "webpack": "^4.12.0"
