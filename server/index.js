@@ -1,7 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import requests from './requests'
-import slack from './slack'
+// import slack from './slack'
 
 const app = express()
 app.use(express.static(__dirname + '/../react/dist'))
