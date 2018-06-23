@@ -9,7 +9,7 @@ app.get('/func/timestamp', (req, res) => {
 })
 
 app.get('/func/timestamp-cached', (req, res) => {
-  res.set('Cache-Control', 'public, max-age=300, s-maxage=600')
+  res.set('Cache-Control', 'public, max-age=600, s-maxage=1200')
   res.send(`${Date.now()}`)
 })
 
