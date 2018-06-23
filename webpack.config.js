@@ -1,6 +1,6 @@
 var path = require('path')
-var SRC_DIR = path.join(__dirname, '/react/src')
-var DIST_DIR = path.join(__dirname, '/react/dist')
+var SRC_DIR = path.join(__dirname, '/src')
+var DIST_DIR = path.join(__dirname, '/public')
 
 module.exports = {
   entry: `${SRC_DIR}/index.js`,
