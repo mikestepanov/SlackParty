@@ -1,10 +1,17 @@
+const admin = require('firebase-admin')
+const functions = require('firebase-functions')
+
 import express from 'express'
 import bodyParser from 'body-parser'
 import requests from './requests'
-// import slack from './slack'
+import slack from './slack'
 
-const app = express()
-app.use(express.static(__dirname + '/../react/dist'))
+console.log(functions)
+
+admin.initializeApp(functions.config().firebase)
+
+export const app = express()
+app.use(express.static(__dirname + '/../public'))
 app.use(bodyParser.json({ limit: '50mb' }))
 
 const port = process.env.PORT || 7777
@@ -55,3 +62,14 @@ app.post('/memeIt', (req, res) => {
 app.get('/slackauth', (req, res) => {
   res.json('sucess')
 })
+
+app.get('/func/timestamp', (req, res) => {
+  res.send(`${Date.now()}`)
+})
+
+app.get('/func/timestamp-cached', (req, res) => {
+  res.set('Cache-Control', 'public, max-age=600, s-maxage=1200')
+  res.send(`${Date.now()}`)
+})
+
+export let ssrapp = functions.https.onRequest(app)

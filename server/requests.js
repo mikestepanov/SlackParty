@@ -1,5 +1,5 @@
 import request from 'request'
-import config from '../config.js'
+import config from './config.js'
 
 const tokensAll = config.tokens
 const tokenPrime = tokensAll[0]

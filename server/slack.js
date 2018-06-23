@@ -1,10 +1,10 @@
 import slackBot from 'slackbots'
 import axios from 'axios'
-import config from '../config'
+import config from './config'
 
 // create a bot
 const bot = new slackBot({
-  // token: config.rend, //rend
+  token: config.rend, //rend
   // token: config.fmbm, //fmbm
   name: 'Ragnaros, the Firelord',
 })

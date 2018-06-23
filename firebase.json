@@ -5,7 +5,7 @@
     "rewrites": [
       {
         "source": "/func/**",
-        "function": "app"
+        "function": "ssrapp"
       },
       {
         "source": "**",
